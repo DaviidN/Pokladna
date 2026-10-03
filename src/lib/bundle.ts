@@ -1,0 +1,1 @@
+export function allocate(prices: number[], total: number): number[]
