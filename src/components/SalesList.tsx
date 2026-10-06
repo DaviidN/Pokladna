@@ -1,24 +1,15 @@
-import { useEffect }from "react";
-import { useSalesStore } from "../store/salesStore";
 import { formatMoney } from "../lib/money";
+import type { SaleWithItems } from "../types";
 
-export const SalesList = () => {
-    const sales = useSalesStore(s => s.sales);
-    const loading = useSalesStore(s => s.loading);
-    const fetchSales = useSalesStore(s => s.fetchSales);
-
-    useEffect(() => { fetchSales(); }, [fetchSales]);
-
-    if (loading) return <p className="text-sm text-muted">Načítám…</p>;
-    if (!sales.length) return <p className="text-sm text-muted">Zatím žádné prodeje.</p>;
+export const SalesList = ({ sales }: { sales: SaleWithItems[] }) => {
 
     return (
-        <div className="flex flex-col gap-2 flex-1">
+        <div className="flex flex-col gap-2">
             {sales.map(sale => (
                 <div key={sale.id} className="rounded-lg border border-line bg-surface p-3">
                     <div className="flex items-center justify-between">
                         <span className="text-sm">
-                            {new Date(sale.event_date).toLocaleDateString('cs-CZ')}
+                            {new Date(sale.created_at).toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' })}
                             {' · '}  
                             <span className="font-mono">
                                 {sale.sale_items.reduce((s, i) => s + i.qty, 0)} ks
@@ -45,5 +36,3 @@ export const SalesList = () => {
         </div>
     );
 };
-
-export default SalesList;
