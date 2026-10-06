@@ -35,7 +35,7 @@ export const SalePage = () => {
       </div>
        <div className="grid items-start gap-5 md:grid-cols-[1fr_340px]">
         <div className='flex flex-col gap-5'>
-          <BundleList bundlesWithItems={bundles} currency={currency} onSelectBundle={addBundle} />
+          <BundleList bundlesWithItems={bundles} products={products} currency={currency} onSelectBundle={addBundle} />
           <ProductList products={products} currency={currency} onSelectProduct={addProduct} />
         </div>
         <div className="md:sticky md:top-6">

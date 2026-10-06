@@ -13,7 +13,7 @@ export const SalesList = () => {
     if (!sales.length) return <p className="text-sm text-muted">Zatím žádné prodeje.</p>;
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 flex-1">
             {sales.map(sale => (
                 <div key={sale.id} className="rounded-lg border border-line bg-surface p-3">
                     <div className="flex items-center justify-between">
