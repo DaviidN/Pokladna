@@ -36,7 +36,8 @@ export const HistoryPage = () => {
 
     sales.forEach(sale =>
     sale.sale_items.forEach(item => {
-        const a = (agg[item.product_id] ??= { name: item.product_name, qty: 0, inBundle: 0 });
+        const key = item.product_id ?? item.product_name;
+        const a = (agg[key] ??= { name: item.product_name, qty: 0, inBundle: 0 });
         a.qty += item.qty;
         if (item.bundle_id) a.inBundle += item.qty;
     })
