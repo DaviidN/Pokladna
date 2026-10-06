@@ -1,12 +1,17 @@
 import React from "react";
 import { type Currency, formatMoney } from "../lib/money";
 import type { Product } from "../types";
+import { Tile } from "./Tile";
+import { useCartStore } from "../store/cartStore";
 
 export const ProductList: React.FC<{ 
     products: Product[], 
     currency: Currency,
     onSelectProduct: (id: string) => void
-    }> = ({ products, currency, onSelectProduct }) => {
+  }> = ({ products, currency, onSelectProduct }) => {
+  
+  const items = useCartStore(s => s.items);
+  
   if (!products.length) {
     return <p className="text-muted text-sm py-6">Katalog je zatím prázdný.</p>;
   }
@@ -14,11 +19,9 @@ export const ProductList: React.FC<{
   return (
     <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-2">
       {products.map((product) => (
-        <button
+        <Tile
           key={product.id}
-          className="flex min-h-19.5 flex-col gap-1.5 rounded-[10px] border border-line
-                     bg-surface p-3 text-left transition-colors
-                     hover:border-line-strong active:scale-[0.985] cursor-pointer"
+          qty={items[product.id] || 0}
           onClick={() => onSelectProduct(product.id)}
         >
           <span className="font-semibold leading-tight">{product.name}</span>
@@ -28,7 +31,7 @@ export const ProductList: React.FC<{
               currency
             )}
           </span>
-        </button>
+        </Tile>
       ))}
     </div>
   );
