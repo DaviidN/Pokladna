@@ -16,7 +16,7 @@ type SalesState = {
     fetchSales: () => Promise<void>;
 };
 
-export const useSalesStore = create<SalesState>((set) => ({
+export const useSalesStore = create<SalesState>((set, get) => ({
     error: null,
     loading: false,
     sales: [],
@@ -38,6 +38,8 @@ export const useSalesStore = create<SalesState>((set) => ({
 
         if (itemsError) { set({ error: itemsError.message }); return false; }
 
+        await get().fetchSales()
+        
         return true;
     },
     fetchSales: async () => {
