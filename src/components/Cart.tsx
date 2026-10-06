@@ -79,9 +79,6 @@ export const Cart: React.FC<{ currency: Currency }> = ({ currency }) => {
       setSaving(false);
       if (ok) clear();
     };
-    console.log('bundleRows:', bundleRows);
-    console.log('cartBundles:', cartBundles);
-    console.log('bundles:', bundles);
 
     return (
     <div className="flex flex-col rounded-[10px] border border-line bg-surface">
